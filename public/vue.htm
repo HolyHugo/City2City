@@ -1,0 +1,39 @@
+<head>
+    <title>City2City</title>
+    <style>
+        body {
+            background-image: url(public/background.jpg);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+        }
+        .formbox{
+            border:solid 1px rgb(184, 173, 173);
+            background-color: wheat;
+            padding: 5px;
+        }
+        #submit{
+            margin-top:5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="formbox">
+            <form action="index.php" method="post" enctype="multipart/form-data">
+                <label>
+                    Fichier à traiter<br>
+                    <input type="file" name="uploaded_file" accept="application/csv,text/csv">
+                </label>
+                <br>
+                <input id="submit" type="submit" name="submit">
+            </form>
+        </div>
+    </div>
+</body>
