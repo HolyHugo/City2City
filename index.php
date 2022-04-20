@@ -4,14 +4,14 @@ if(file_exists('.env')){
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 }
-require_once('vue.htm');
+require_once('public/vue.htm');
 $doneLines = [];
 if (!empty($_POST) && !empty($_FILES)) {
     $handle = fopen($_FILES['uploaded_file']['tmp_name'], "r");
     if ($handle) {
         while (($line = fgetcsv($handle)) !== false) {
             $result = appelCurl(noWhitespace($line[0]), noWhitespace($line[1]));
-            
+
             $distanceKM = $result['rows'][0]['elements'][0]['distance']['text'] ?? '/';
             $doneLines[] = [$result['origin_addresses'][0], $result['destination_addresses'][0], $distanceKM,'',$line[0],$line[1]];
         }
