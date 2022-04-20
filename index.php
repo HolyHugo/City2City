@@ -12,7 +12,7 @@ if (!empty($_POST) && !empty($_FILES)) {
         while (($line = fgetcsv($handle)) !== false) {
             $result = appelCurl($line[0], $line[1]);
             $distanceKM = $result['rows'][0]['elements'][0]['distance']['text'];
-            $doneLines[] = [$result['origin_addresses'][0], $result['destination_addresses'][0], $distanceKM];
+            $doneLines[] = [$result['origin_addresses'][0], $result['destination_addresses'][0], $distanceKM,'',$line[0],$line[1]];
         }
 
         fclose($handle);
@@ -28,8 +28,9 @@ function writeResultInFile($resultLines)
     ob_start();
     header('Content-Type: application/csv');
     header('Content-Disposition: attachment; filename="distanceVille' . date('d-m-Y') . '.csv";');
+    header('Content-Encoding: UTF-8');
     $file = fopen("php://output", "w");
-    fputcsv($file, ['Ville Départ', 'Ville Arrivée', 'Distance']);
+    fputcsv($file, ['Ville Départ', 'Ville Arrivée', 'Distance', ' --- ','Ville départ originale','Ville arrivée']);
 
     foreach ($resultLines as $line) {
         fputcsv($file, $line);
