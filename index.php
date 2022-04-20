@@ -10,8 +10,9 @@ if (!empty($_POST) && !empty($_FILES)) {
     $handle = fopen($_FILES['uploaded_file']['tmp_name'], "r");
     if ($handle) {
         while (($line = fgetcsv($handle)) !== false) {
-            $result = appelCurl($line[0], $line[1]);
-            $distanceKM = $result['rows'][0]['elements'][0]['distance']['text'];
+            $result = appelCurl(noWhitespace($line[0]), noWhitespace($line[1]));
+            
+            $distanceKM = $result['rows'][0]['elements'][0]['distance']['text'] ?? '/';
             $doneLines[] = [$result['origin_addresses'][0], $result['destination_addresses'][0], $distanceKM,'',$line[0],$line[1]];
         }
 
@@ -52,4 +53,7 @@ function appelCurl($villeDepart, $villeArrivee)
 
     $result = curl_exec($ch);
     return json_decode($result, true);
+}
+function noWhitespace($string) {
+    return preg_replace('/\s+/','',$string);
 }
