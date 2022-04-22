@@ -1,0 +1,58 @@
+body {
+    background-image: url(background.jpg);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.formbox {
+    border: solid 1px rgb(184, 173, 173);
+    background-color: wheat;
+    padding: 5px;
+}
+
+#submit {
+    margin-top: 5px;
+}
+
+hr {
+    border: 1px black solid;
+}
+
+a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(83, 77, 78);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:active {
+    color: rgb(114, 0, 190);
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+ul.no-bullets {
+    list-style-type: none;
+    /* Remove bullets */
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margins */
+}

@@ -10,18 +10,8 @@ $dotenv->load();
 $doneLines = [];
 
 if (!empty($_POST) && !empty($_FILES)) {
-    $handle = fopen($_FILES['uploaded_file']['tmp_name'], "r");
-    if ($handle) {
-        while (($line = fgetcsv($handle,0,$_POST['separator_entry'])) !== false) {
-            $result = Utils::appelCurl(Utils::noWhitespace($line[0]), Utils::noWhitespace($line[1]));
-
-            $distanceKM = $result['rows'][0]['elements'][0]['distance']['text'] ?? '/';
-            $doneLines[] = [$result['origin_addresses'][0], $result['destination_addresses'][0], $distanceKM,'',$line[0],$line[1]];
-        }
-
-        fclose($handle);
-        Utils::writeResultInFile($doneLines,$_POST['separator_output']);
-    } else {
-        print_r('Une erreur est survenue :/');
+    $filename = pathinfo($_FILES['uploaded_file']['name'], PATHINFO_FILENAME);
+    move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], "process/inputfile.csv");
+    $script = sprintf("python3 process/process.py %s '%s' '%s' %s > /dev/null 2>&1 &",$_ENV['API_KEY'],$_POST['separator_entry'],$_POST['separator_output'],$filename);
+    system($script);
     }
-}
