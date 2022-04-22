@@ -2,7 +2,7 @@
 if ($handle = opendir('process/available/')) {
     while (false !== ($file = readdir($handle))) {
         if ($file != "." && $file != "..") {
-            $thelist .= '<li><a href="' . $file . '">' . $file . '</a></li>';
+            $thelist .= '<li><a href="process/available/' . $file . '">' . $file . '</a></li>';
         }
     }
     closedir($handle);
