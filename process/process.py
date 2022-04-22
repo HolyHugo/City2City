@@ -2,6 +2,7 @@
 # pip3 install pandas
 # pip3 install -U googlemaps
 # pip3 install python-dotenv
+# coding: utf-8
 import os
 import csv
 import sys
